@@ -71,8 +71,16 @@ Before setting up, make sure you have the following installed:
   ```
   This will start the server at `http://localhost:3000`.
 
+
 ### 5. Open the Webpage:
 - Open `index.html` in your web browser. The webpage will interact with the Teachable Machine model and display the detection counter.
+  
+- image of the webpage:
+![Image](https://github.com/user-attachments/assets/e618f2a5-2949-47a0-981a-a3187eb74377)
+
+
+
+  
 
 ## 🧑‍💻 Usage
 
@@ -107,6 +115,7 @@ Before setting up, make sure you have the following installed:
    curl -X POST http://localhost:3000/resetCounter
    ```
 
+
 ## 🔧 Troubleshooting
 
 ### MongoDB Connection Issues:
@@ -119,8 +128,22 @@ Before setting up, make sure you have the following installed:
 
 
 ## Example of the Project in Action:
+**Teachable Machine:**
+![Image](https://github.com/user-attachments/assets/01672ceb-d4c2-4466-8133-3741d70af2a2)
 
-![Project Screenshot](images/project_working_example.png)
+
+
+
+
+
+**Webpage:**
+
+![Image](https://github.com/user-attachments/assets/5183d735-0112-4b95-8802-65bdb3da0bab)
+
+
+
+
+
 
 ### Steps for Testing:
 1. Train your Teachable Machine model for object detection.
