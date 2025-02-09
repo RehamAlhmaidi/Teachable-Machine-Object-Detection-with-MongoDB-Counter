@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teachable Machine Object Detection</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Object Detection with Teachable Machine</h1>
+            <p>Detect objects using your webcam and track the count.</p>
+        </header>
+
+        <section id="webcam-container" class="webcam-container"></section>
+
+        <section class="info-section">
+            <div id="label-container" class="label-container"></div>
+            <div class="counter-info">
+                <p>Detection Count: <span id="counter">0</span></p>
+                <button id="reset-button" class="button">Reset Counter</button>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2025 Object Detection Project</p>
+        </footer>
+    </div>
+
+    <script type="text/javascript">
+        // More API functions here:
+        // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
+
+        // the link to your model provided by Teachable Machine export panel
+        const URL = "https://teachablemachine.withgoogle.com/models/8qvTmSblC/";
+
+        let model, webcam, labelContainer, maxPredictions;
+
+        // Load the image model and setup the webcam
+        async function init() {
+            const modelURL = URL + "model.json";
+            const metadataURL = URL + "metadata.json";
+
+            model = await tmImage.load(modelURL, metadataURL);
+            maxPredictions = model.getTotalClasses();
+
+            // Webcam setup
+            const flip = true;
+            webcam = new tmImage.Webcam(200, 200, flip); // width, height, flip
+            await webcam.setup();
+            await webcam.play();
+            window.requestAnimationFrame(loop);
+
+            document.getElementById("webcam-container").appendChild(webcam.canvas);
+            labelContainer = document.getElementById("label-container");
+            for (let i = 0; i < maxPredictions; i++) {
+                labelContainer.appendChild(document.createElement("div"));
+            }
+        }
+
+        async function loop() {
+            webcam.update(); // update the webcam frame
+            await predict();
+            window.requestAnimationFrame(loop);
+        }
+
+        // run the webcam image through the image model
+        async function predict() {
+            const prediction = await model.predict(webcam.canvas);
+            let detected = false;
+            for (let i = 0; i < maxPredictions; i++) {
+                const classPrediction = prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+                labelContainer.childNodes[i].innerHTML = classPrediction;
+
+                // Update detection counter if detection probability is high enough
+                if (prediction[i].probability > 0.7) {
+                    detected = true;
+                }
+            }
+
+            if (detected) {
+                updateCounter();
+            }
+        }
+
+        // Update the detection count
+        function updateCounter() {
+            let currentCount = parseInt(document.getElementById("counter").innerText);
+            currentCount++;
+            document.getElementById("counter").innerText = currentCount;
+
+            // Send the updated count to the server (if needed)
+            fetch('/updateCounter', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ count: currentCount })
+            });
+        }
+
+        // Reset the detection count
+        document.getElementById("reset-button").addEventListener("click", async () => {
+            document.getElementById("counter").innerText = "0";
+
+            await fetch('/resetCounter', {
+                method: 'POST'
+            });
+        });
+
+        init();
+    </script>
+</body>
+</html>
+
