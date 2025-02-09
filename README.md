@@ -38,7 +38,8 @@ Before setting up, make sure you have the following installed:
 ### Steps to Set Up the Project
 
 1. **Download the project**:
-   - Go to the GitHub repository of this project: `[https://github.com/your-username/teachable-machine-object-detection](https://github.com/RehamAlhmaidi/Teachable-Machine-Object-Detection-with-MongoDB-Counter.git)`
+   - Go to the GitHub repository of this project: [Teachable Machine Object Detection Repository](https://github.com/RehamAlhmaidi/Teachable-Machine-Object-Detection-with-MongoDB-Counter.git)
+
    - Click on the **"Code"** button and select **"Download ZIP"**.
    - Extract the ZIP file to your desired location on your computer.
 
