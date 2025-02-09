@@ -5,6 +5,7 @@ This project is a **web application** that integrates a custom object detection 
 
 This project is a **web application** that integrates a custom object detection model from [Teachable Machine](https://teachablemachine.withgoogle.com/). The app detects objects via a webcam and updates a **MongoDB database** with a detection counter, which is displayed on a webpage. A **reset button** allows you to reset the detection counter.
 
+---
 
 ## 🎯 Features
 
@@ -13,6 +14,7 @@ This project is a **web application** that integrates a custom object detection 
 - **Real-Time Display**: View the updated detection count live on the webpage.
 - **Reset Counter**: Reset the counter with the click of a button.
 
+---
 
 ## 🛠️ Technologies Used
 
@@ -22,6 +24,7 @@ This project is a **web application** that integrates a custom object detection 
 - **MongoDB**: NoSQL database used to store detection count.
 - **JavaScript**: To interact with the Teachable Machine model and handle the counter.
 
+---
 
 ## 🚀 Installation
 
@@ -44,6 +47,8 @@ Before setting up, make sure you have the following installed:
    ```bash
    npm install
 
+---
+
 ## Setup
 
 ### 3. Set up MongoDB:
@@ -63,6 +68,8 @@ Before setting up, make sure you have the following installed:
 - Set up a MongoDB Atlas cloud database.
 - Copy the MongoDB Atlas connection string and update the `server.js` file with the new URI.
 
+---
+
 ### 4. Run the Backend Server:
 
 - In the project folder, run the following command:
@@ -71,6 +78,7 @@ Before setting up, make sure you have the following installed:
   ```
   This will start the server at `http://localhost:3000`.
 
+---
 
 ### 5. Open the Webpage:
 - Open `index.html` in your web browser. The webpage will interact with the Teachable Machine model and display the detection counter.
@@ -97,6 +105,8 @@ Before setting up, make sure you have the following installed:
 - **POST /updateCounter**: Update the detection count in the database.
 - **POST /resetCounter**: Reset the detection count to 0 in the database.
 
+---
+
 ### Example of Using the API:
 
 1. **Get the current counter:**
@@ -116,7 +126,7 @@ Before setting up, make sure you have the following installed:
    ```bash
    curl -X POST http://localhost:3000/resetCounter
    ```
-
+---
 
 ## 🔧 Troubleshooting
 
@@ -145,9 +155,7 @@ Before setting up, make sure you have the following installed:
 ![Image](https://github.com/user-attachments/assets/5183d735-0112-4b95-8802-65bdb3da0bab)
 
 
-
-
-
+---
 
 ### Steps for Testing:
 1. Train your Teachable Machine model for object detection.
